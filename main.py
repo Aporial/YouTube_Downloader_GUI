@@ -3,6 +3,9 @@ from pytube import YouTube
 from pytube.cli import on_progress
 import os
 
+os.remove('video.mp4')
+os.remove('audio.mp3')
+
 url = input('Video link: ')
 yt = YouTube(url, on_progress_callback=on_progress)
 
