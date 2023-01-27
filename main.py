@@ -42,4 +42,5 @@ os.remove('video.mp4')
 os.remove('audio.mp3')
 
 print('Відео завантажено!')
-input()
+
+exit()
