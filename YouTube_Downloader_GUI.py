@@ -79,18 +79,18 @@ def download():
     if sell == 4:
         yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
         video = ffmpeg.input("video.mp4")
-
+    bar.configure(value=33)
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
-
+    bar.configure(value=66)
     ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
     var.set(0)
     link.configure(state=NORMAL)
     dwnl.configure(text='Download', state=NORMAL)
     fnd.configure(state=NORMAL)
-
+    bar.configure(value=75)
+    bar.configure(value=0)
     showinfo(title='Download status', message='Download completed!')
-
     os.remove('video.mp4')
     os.remove('audio.mp3')
 
@@ -125,7 +125,7 @@ uhd_q.place(x=230, y=150)
 dwnl = ttk.Button(text='Download', command=threading_download)
 dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 
-bar = ttk.Progressbar(mode='determinate')
+bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
 bar.pack(side=BOTTOM, fill='x', padx=10)
 
 
@@ -133,7 +133,7 @@ nam0 = Label(text='Name: ')
 nam0.pack()
 nam0.place(x=180, y=375)
 
-nam = Label()
+nam = Label(justify=LEFT, width=50)
 nam.pack(side=BOTTOM)
 
 #########################
