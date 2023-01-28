@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter.messagebox import showerror, showwarning, showinfo
+from tkinter.messagebox import showinfo
 
 import ffmpeg
 from pytube import YouTube
@@ -26,13 +26,7 @@ root.geometry('400x500+750+250')
 root.resizable(False, False)
 
 ##################
-
 var = IntVar()
-
-##################
-
-
-
 ##################
 def get_url():
     url = link.get()
@@ -46,22 +40,6 @@ def get_url():
         twok_q.configure(state=NORMAL)
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
         uhd_q.configure(state=NORMAL)
-
-
-
-link = ttk.Entry()
-link.pack(side='top', pady=5, ipady=5,)
-link.place(x=110, y=8, height=25, width=280)
-
-
-label = ttk.Label(text='Enter link:', font=('Intro', 12))
-label.pack(side='top')
-label.place(x=4, y=9)
-
-fnd = ttk.Button(text='Find', command=get_url)
-fnd.pack(side=TOP)
-fnd.place(x=165, y=40)
-
 def selected():
     var.get()
 
@@ -84,14 +62,23 @@ def download():
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
     ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
-    showinfo(title='Download status:', message='Download completed!')
+
+    showinfo(title='Download status', message='Download completed!')
+
     os.remove('video.mp4')
     os.remove('audio.mp3')
 
+link = ttk.Entry()
+link.pack(side='top', pady=5, ipady=5,)
+link.place(x=110, y=8, height=25, width=280)
 
+label = ttk.Label(text='Enter link:', font=('Intro', 12))
+label.pack(side='top')
+label.place(x=4, y=9)
 
-
-
+fnd = ttk.Button(text='Find', command=get_url)
+fnd.pack(side=TOP)
+fnd.place(x=165, y=40)
 
 hd_q = ttk.Radiobutton(text='HD', state=DISABLED, value=1, variable=var, command=selected)
 hd_q.pack()
@@ -123,12 +110,5 @@ nam = Label()
 nam.pack(side=BOTTOM)
 
 #########################
-
-
-
-
-
-
-
 
 root.mainloop()
