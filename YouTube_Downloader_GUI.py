@@ -90,7 +90,7 @@ def download():
     fnd.configure(state=NORMAL)
     bar.configure(value=75)
     bar.configure(value=0)
-    showinfo(title='Download status', message='Download completed!')
+    showinfo(title='Download Status', message='Download Completed!')
     os.remove('video.mp4')
     os.remove('audio.mp3')
 
