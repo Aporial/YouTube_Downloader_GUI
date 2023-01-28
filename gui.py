@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 
-import threading
+from threading import *
 
 import ffmpeg
 from pytube import YouTube
@@ -29,6 +29,13 @@ root.resizable(False, False)
 ##################
 var = IntVar()
 ##################
+
+def threading_url():
+    t1=Thread(target=get_url)
+    t1.start()
+def threading_download():
+    t2=Thread(target=download)
+    t2.start()
 def get_url():
     url = link.get()
     yt = YouTube(url)
@@ -41,8 +48,6 @@ def get_url():
         twok_q.configure(state=NORMAL)
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
         uhd_q.configure(state=NORMAL)
-
-thr1 = threading.Thread(target=get_url)
 
 def selected():
     var.get()
@@ -82,7 +87,7 @@ label = ttk.Label(text='Enter link:', font=('Intro', 12))
 label.pack(side='top')
 label.place(x=4, y=9)
 
-fnd = ttk.Button(text='Find', command=get_url)
+fnd = ttk.Button(text='Find', command=threading_url)
 fnd.pack(side=TOP)
 fnd.place(x=165, y=40)
 
@@ -102,7 +107,7 @@ uhd_q = ttk.Radiobutton(text='4K', state=DISABLED, value=4, variable=var, comman
 uhd_q.pack()
 uhd_q.place(x=230, y=150)
 
-dwnl = ttk.Button(text='Download', command=download)
+dwnl = ttk.Button(text='Download', command=threading_download)
 dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 
 bar = ttk.Progressbar(mode='determinate')
