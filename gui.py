@@ -25,6 +25,14 @@ def get_url():
     yt = YouTube(url)
     nam['text'] = yt.title
     print(url)
+    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="720p"):
+        hd_q.configure(state=NORMAL)
+    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="1080p"):
+        fhd_q.configure(state=NORMAL)
+    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="1440p"):
+        twok_q.configure(state=NORMAL)
+    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
+        uhd_q.configure(state=NORMAL)
 
 
 
@@ -46,19 +54,21 @@ fhd = 'Full HD'
 twok = '2K'
 uhd = '4K'
 
-hd_q = ttk.Radiobutton(text='720p', value=hd)
+
+
+hd_q = ttk.Radiobutton(text='HD', value=hd, state=DISABLED)
 hd_q.pack()
 hd_q.place(x=120, y=80)
 
-fhd_q = ttk.Radiobutton(text='1080p', value=fhd)
+fhd_q = ttk.Radiobutton(text='Full HD', value=fhd, state=DISABLED)
 fhd_q.pack()
 fhd_q.place(x=230, y=80)
 
-twok_q = ttk.Radiobutton(text='1440p', value=twok)
+twok_q = ttk.Radiobutton(text='2K', value=twok, state=DISABLED)
 twok_q.pack()
 twok_q.place(x=120, y=150)
 
-uhd_q = ttk.Radiobutton(text='2160p', value=uhd)
+uhd_q = ttk.Radiobutton(text='4K', value=uhd, state=DISABLED)
 uhd_q.pack()
 uhd_q.place(x=230, y=150)
 
