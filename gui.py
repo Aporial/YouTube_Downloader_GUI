@@ -1,19 +1,33 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter.messagebox import showerror, showwarning, showinfo
 
 import ffmpeg
 from pytube import YouTube
 from pytube.cli import on_progress
 import os
 
-#os.remove('video.mp4')
-#os.remove('audio.mp3')
+##################
+
+video_file = 'video.mp4'
+audio_file = 'audio.mp3'
+
+if os.path.exists(video_file):
+    os.remove('video.mp4')
+if os.path.exists(audio_file):
+    os.remove('audio.mp3')
+
+##################
 
 root = Tk()
 root.title('YouTube Downloader')
 root.iconbitmap(default='favicon.ico')
 root.geometry('400x500+750+250')
 root.resizable(False, False)
+
+##################
+
+var = IntVar()
 
 ##################
 
@@ -24,14 +38,13 @@ def get_url():
     url = link.get()
     yt = YouTube(url)
     nam['text'] = yt.title
-    print(url)
-    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="720p"):
+    if yt.streams.filter(video_codec="vp9", adaptive=True, res="720p"):
         hd_q.configure(state=NORMAL)
-    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="1080p"):
+    if yt.streams.filter(video_codec="vp9", adaptive=True, res="1080p"):
         fhd_q.configure(state=NORMAL)
-    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="1440p"):
+    if yt.streams.filter(video_codec="vp9", adaptive=True, res="1440p"):
         twok_q.configure(state=NORMAL)
-    for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
+    if yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
         uhd_q.configure(state=NORMAL)
 
 
@@ -49,30 +62,54 @@ fnd = ttk.Button(text='Find', command=get_url)
 fnd.pack(side=TOP)
 fnd.place(x=165, y=40)
 
-hd = 'HD'
-fhd = 'Full HD'
-twok = '2K'
-uhd = '4K'
+def selected():
+    var.get()
+
+def download():
+    url = link.get()
+    yt = YouTube(url)
+    sell = var.get()
+    if sell == 1:
+        yt.streams.filter(res="720p", progressive=False).first().download(filename="video.mp4")
+        video = ffmpeg.input("video.mp4")
+    if sell == 2:
+        yt.streams.filter(res="1080p", progressive=False).first().download(filename="video.mp4")
+        video = ffmpeg.input("video.mp4")
+    if sell == 3:
+        yt.streams.filter(res="1440p", progressive=False).first().download(filename="video.mp4")
+        video = ffmpeg.input("video.mp4")
+    if sell == 4:
+        yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
+        video = ffmpeg.input("video.mp4")
+    yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
+    audio = ffmpeg.input("audio.mp3")
+    ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
+    showinfo(title='Download status:', message='Download completed!')
+    os.remove('video.mp4')
+    os.remove('audio.mp3')
 
 
 
-hd_q = ttk.Radiobutton(text='HD', value=hd, state=DISABLED)
+
+
+
+hd_q = ttk.Radiobutton(text='HD', state=DISABLED, value=1, variable=var, command=selected)
 hd_q.pack()
 hd_q.place(x=120, y=80)
 
-fhd_q = ttk.Radiobutton(text='Full HD', value=fhd, state=DISABLED)
+fhd_q = ttk.Radiobutton(text='Full HD', state=DISABLED, value=2, variable=var, command=selected)
 fhd_q.pack()
 fhd_q.place(x=230, y=80)
 
-twok_q = ttk.Radiobutton(text='2K', value=twok, state=DISABLED)
+twok_q = ttk.Radiobutton(text='2K', state=DISABLED, value=3, variable=var, command=selected)
 twok_q.pack()
 twok_q.place(x=120, y=150)
 
-uhd_q = ttk.Radiobutton(text='4K', value=uhd, state=DISABLED)
+uhd_q = ttk.Radiobutton(text='4K', state=DISABLED, value=4, variable=var, command=selected)
 uhd_q.pack()
 uhd_q.place(x=230, y=150)
 
-dwnl = ttk.Button(text='Download')
+dwnl = ttk.Button(text='Download', command=download)
 dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 
 bar = ttk.Progressbar()
