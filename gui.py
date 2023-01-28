@@ -2,9 +2,10 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 
+import threading
+
 import ffmpeg
 from pytube import YouTube
-from pytube.cli import on_progress
 import os
 
 ##################
@@ -40,6 +41,9 @@ def get_url():
         twok_q.configure(state=NORMAL)
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
         uhd_q.configure(state=NORMAL)
+
+thr1 = threading.Thread(target=get_url)
+
 def selected():
     var.get()
 
@@ -59,8 +63,10 @@ def download():
     if sell == 4:
         yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
         video = ffmpeg.input("video.mp4")
+
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
+
     ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
 
     showinfo(title='Download status', message='Download completed!')
@@ -99,8 +105,9 @@ uhd_q.place(x=230, y=150)
 dwnl = ttk.Button(text='Download', command=download)
 dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 
-bar = ttk.Progressbar()
+bar = ttk.Progressbar(mode='determinate')
 bar.pack(side=BOTTOM, fill='x', padx=10)
+
 
 nam0 = Label(text='Name: ')
 nam0.pack()
