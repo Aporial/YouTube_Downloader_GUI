@@ -22,7 +22,7 @@ if os.path.exists(audio_file):
 
 root = Tk()
 root.title('YouTube Downloader')
-root.iconbitmap(default='favicon.ico')
+root.iconbitmap(default='./Core/favicon.ico')
 root.geometry('400x500+750+250')
 root.resizable(False, False)
 
@@ -40,6 +40,9 @@ def get_url():
     url = link.get()
     yt = YouTube(url)
     nam['text'] = yt.title
+
+    fnd.configure(text='Finding...', state=DISABLED)
+
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="720p"):
         hd_q.configure(state=NORMAL)
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="1080p"):
@@ -49,12 +52,20 @@ def get_url():
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
         uhd_q.configure(state=NORMAL)
 
+    fnd.configure(text='Find', state=NORMAL)
 def selected():
     var.get()
 
 def download():
     url = link.get()
     yt = YouTube(url)
+    dwnl.configure(text='Downloading...', state=DISABLED)
+    fnd.configure(state=DISABLED)
+    link.configure(state=DISABLED)
+    hd_q.configure(state=DISABLED)
+    fhd_q.configure(state=DISABLED)
+    twok_q.configure(state=DISABLED)
+    uhd_q.configure(state=DISABLED)
     sell = var.get()
     if sell == 1:
         yt.streams.filter(res="720p", progressive=False).first().download(filename="video.mp4")
@@ -73,6 +84,10 @@ def download():
     audio = ffmpeg.input("audio.mp3")
 
     ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
+    var.set(0)
+    link.configure(state=NORMAL)
+    dwnl.configure(text='Download', state=NORMAL)
+    fnd.configure(state=NORMAL)
 
     showinfo(title='Download status', message='Download completed!')
 
