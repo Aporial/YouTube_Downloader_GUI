@@ -53,6 +53,7 @@ def get_url():
         uhd_q.configure(state=NORMAL)
 
     fnd.configure(text='Find', state=NORMAL)
+    dwnl.configure(state=NORMAL)
 def selected():
     var.get()
 
@@ -122,7 +123,7 @@ uhd_q = ttk.Radiobutton(text='4K', state=DISABLED, value=4, variable=var, comman
 uhd_q.pack()
 uhd_q.place(x=230, y=150)
 
-dwnl = ttk.Button(text='Download', command=threading_download)
+dwnl = ttk.Button(text='Download', command=threading_download, state=DISABLED)
 dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 
 bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
