@@ -139,10 +139,11 @@ bar.pack(side=BOTTOM, fill='x', padx=10)
 
 nam0 = customtkinter.CTkLabel(master=root, text='Name: ', font=('Arial', 14))
 nam0.pack()
-nam0.place(x=180, y=375)
+nam0.place(x=180, y=360)
 
-nam = customtkinter.CTkLabel(master=root, justify=LEFT, width=50, text='')
+nam = customtkinter.CTkLabel(master=root, justify=LEFT, width=50, text='', font=('Arial', 14))
 nam.pack(side=BOTTOM)
+nam.place(x=175, y=380)
 
 #########################
 
