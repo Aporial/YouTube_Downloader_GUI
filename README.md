@@ -1,4 +1,4 @@
-# YouTube_Downloader
+# YouTube_Downloader_nonGUI and GUI
 For the code to function, you need to download [FFMPEG](https://ffmpeg.org/download.html) and move the ffmpeg.exe file to the root of the program.
 
 
