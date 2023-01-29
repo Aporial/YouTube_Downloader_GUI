@@ -111,9 +111,9 @@ label = customtkinter.CTkLabel(master=root, text='Enter link:', font=('Arial', 2
 label.pack(side='top')
 label.place(x=12, y=6)
 
-fnd = customtkinter.CTkButton(master=root, text='Find', font=('Arial', 15), command=threading_url)
+fnd = customtkinter.CTkButton(master=root, text='Find', font=('Arial', 18), command=threading_url)
 fnd.pack(side=TOP)
-fnd.place(x=140, y=40)
+fnd.place(x=130, y=40)
 
 hd_q = customtkinter.CTkRadioButton(master=root, text='HD', font=('Arial', 18), state=DISABLED, value=1, variable=var, command=selected)
 hd_q.pack()
