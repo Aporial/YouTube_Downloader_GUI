@@ -40,7 +40,6 @@ audio = ffmpeg.input("audio.mp3")
 print('Wait. Video is being processed...')
 
 ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
-
 os.remove('video.mp4')
 os.remove('audio.mp3')
 
