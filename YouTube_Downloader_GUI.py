@@ -84,7 +84,7 @@ def download():
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
     bar.configure(value=66)
-    ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
+    ffmpeg.output(video, audio, 'download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
     var.set(0)
     link.configure(state=NORMAL)
     dwnl.configure(text='Download', state=NORMAL)

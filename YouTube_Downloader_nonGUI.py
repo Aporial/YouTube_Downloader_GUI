@@ -3,8 +3,13 @@ from pytube import YouTube
 from pytube.cli import on_progress
 import os
 
-os.remove('video.mp4')
-os.remove('audio.mp3')
+video_file = 'video.mp4'
+audio_file = 'audio.mp3'
+
+if os.path.exists(video_file):
+    os.remove('video.mp4')
+if os.path.exists(audio_file):
+    os.remove('audio.mp3')
 
 url = input('Video link: ')
 yt = YouTube(url, on_progress_callback=on_progress)
@@ -39,7 +44,7 @@ audio = ffmpeg.input("audio.mp3")
 
 print('Wait. Video is being processed...')
 
-ffmpeg.output(video, audio, "download_video.mp4", loglevel="quiet").run(overwrite_output=True)
+ffmpeg.output(video, audio, 'download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
 os.remove('video.mp4')
 os.remove('audio.mp3')
 
