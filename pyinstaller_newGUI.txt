@@ -1,0 +1,1 @@
+pyinstaller --icon=icon.ico --noconfirm --onedir --windowed --add-data "C:\Users\Aporia\PycharmProjects\YouTube Downloader\venv\Lib\site-packages\customtkinter;customtkinter/"  "<Path to Python Script>"
