@@ -84,7 +84,7 @@ def download():
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
     bar.configure(value=66)
-    ffmpeg.output(video, audio, 'download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
+    ffmpeg.output(video, audio, 'Download/download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
     var.set(0)
     link.configure(state=NORMAL)
     dwnl.configure(text='Download', state=NORMAL)
@@ -92,6 +92,7 @@ def download():
     bar.configure(value=75)
     bar.configure(value=0)
     showinfo(title='Download Status', message='Download Completed!')
+    os.system('start Download')
     os.remove('video.mp4')
     os.remove('audio.mp3')
 
