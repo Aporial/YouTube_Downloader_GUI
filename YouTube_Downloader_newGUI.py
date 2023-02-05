@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
+from tkinter import messagebox
 
 from threading import *
 
@@ -116,8 +117,6 @@ def keypress(event):
         event.widget.event_generate("<<Clear>>")
     elif event.keycode == 65:
         event.widget.event_generate("<<SelectAll>>")
-
-
 root.bind("<Control-KeyPress>", keypress)
 
 
@@ -164,5 +163,9 @@ nam.pack(side=BOTTOM)
 nam.place(x=10, y=380)
 
 #########################
+def on_closing():
+    if messagebox.askokcancel("Exit", "Do you want to exit?"):
+        root.destroy()
 
+root.protocol("WM_DELETE_WINDOW", on_closing)
 root.mainloop()
