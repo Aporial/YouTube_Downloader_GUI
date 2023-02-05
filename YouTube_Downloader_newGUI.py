@@ -105,6 +105,22 @@ def download():
     os.remove('video.mp4')
     os.remove('audio.mp3')
 
+def keypress(event):
+    if event.keycode == 86:
+        event.widget.event_generate("<<Paste>>")
+    elif event.keycode == 67:
+        event.widget.event_generate("<<Copy>>")
+    elif event.keycode == 88:
+        event.widget.event_generate("<<Cut>>")
+    elif event.keycode == 65535:
+        event.widget.event_generate("<<Clear>>")
+    elif event.keycode == 65:
+        event.widget.event_generate("<<SelectAll>>")
+
+
+root.bind("<Control-KeyPress>", keypress)
+
+
 link = customtkinter.CTkEntry(master=root)
 link.pack(side='top', pady=5, ipady=5,)
 link.place(x=110, y=8, height=25, width=280)
