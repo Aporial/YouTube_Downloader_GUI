@@ -11,7 +11,6 @@ import os
 
 import customtkinter
 
-
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
@@ -36,14 +35,19 @@ root.resizable(False, False)
 
 ##################
 var = IntVar()
+
+
 ##################
 
 def threading_url():
-    t1=Thread(target=get_url)
+    t1 = Thread(target=get_url)
     t1.start()
+
+
 def threading_download():
-    t2=Thread(target=download)
+    t2 = Thread(target=download)
     t2.start()
+
 
 def get_url():
     url = link.get()
@@ -64,8 +68,11 @@ def get_url():
 
     fnd.configure(text='Find', state=NORMAL)
     dwnl.configure(state=NORMAL)
+
+
 def selected():
     var.get()
+
 
 def download():
     url = link.get()
@@ -80,16 +87,13 @@ def download():
     sell = var.get()
     if sell == 1:
         yt.streams.filter(res="720p", progressive=False).first().download(filename="video.mp4")
-        video = ffmpeg.input("video.mp4")
     if sell == 2:
         yt.streams.filter(res="1080p", progressive=False).first().download(filename="video.mp4")
-        video = ffmpeg.input("video.mp4")
     if sell == 3:
         yt.streams.filter(res="1440p", progressive=False).first().download(filename="video.mp4")
-        video = ffmpeg.input("video.mp4")
     if sell == 4:
         yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
-        video = ffmpeg.input("video.mp4")
+    video = ffmpeg.input("video.mp4")
     bar.configure(value=33)
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
@@ -106,6 +110,7 @@ def download():
     os.remove('video.mp4')
     os.remove('audio.mp3')
 
+
 def keypress(event):
     if event.keycode == 86:
         event.widget.event_generate("<<Paste>>")
@@ -117,11 +122,12 @@ def keypress(event):
         event.widget.event_generate("<<Clear>>")
     elif event.keycode == 65:
         event.widget.event_generate("<<SelectAll>>")
+
+
 root.bind("<Control-KeyPress>", keypress)
 
-
 link = customtkinter.CTkEntry(master=root)
-link.pack(side='top', pady=5, ipady=5,)
+link.pack(side='top', pady=5, ipady=5, )
 link.place(x=110, y=8, height=25, width=280)
 
 label = customtkinter.CTkLabel(master=root, text='Enter link:', font=('Arial', 20))
@@ -132,23 +138,28 @@ fnd = customtkinter.CTkButton(master=root, text='Find', font=('Arial', 18), comm
 fnd.pack(side=TOP)
 fnd.place(x=130, y=40)
 
-hd_q = customtkinter.CTkRadioButton(master=root, text='HD', font=('Arial', 18), state=DISABLED, value=1, variable=var, command=selected)
+hd_q = customtkinter.CTkRadioButton(master=root, text='HD', font=('Arial', 18), state=DISABLED, value=1, variable=var,
+                                    command=selected)
 hd_q.pack()
 hd_q.place(x=120, y=80)
 
-fhd_q = customtkinter.CTkRadioButton(master=root, text='Full HD', font=('Arial', 18), state=DISABLED, value=2, variable=var, command=selected)
+fhd_q = customtkinter.CTkRadioButton(master=root, text='Full HD', font=('Arial', 18), state=DISABLED, value=2,
+                                     variable=var, command=selected)
 fhd_q.pack()
 fhd_q.place(x=230, y=80)
 
-twok_q = customtkinter.CTkRadioButton(master=root, text='2K', font=('Arial', 18), state=DISABLED, value=3, variable=var, command=selected)
+twok_q = customtkinter.CTkRadioButton(master=root, text='2K', font=('Arial', 18), state=DISABLED, value=3, variable=var,
+                                      command=selected)
 twok_q.pack()
 twok_q.place(x=120, y=150)
 
-uhd_q = customtkinter.CTkRadioButton(master=root, text='4K', font=('Arial', 18), state=DISABLED, value=4, variable=var, command=selected)
+uhd_q = customtkinter.CTkRadioButton(master=root, text='4K', font=('Arial', 18), state=DISABLED, value=4, variable=var,
+                                     command=selected)
 uhd_q.pack()
 uhd_q.place(x=230, y=150)
 
-dwnl = customtkinter.CTkButton(master=root, text='Download', font=('Arial', 18), command=threading_download, state=DISABLED)
+dwnl = customtkinter.CTkButton(master=root, text='Download', font=('Arial', 18), command=threading_download,
+                               state=DISABLED)
 dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 
 bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
@@ -162,10 +173,12 @@ nam = customtkinter.CTkLabel(master=root, justify=RIGHT, width=40, text='', font
 nam.pack(side=BOTTOM)
 nam.place(x=10, y=380)
 
+
 #########################
 def on_closing():
     if messagebox.askokcancel("Exit", "Do you want to exit?"):
         root.destroy()
+
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 root.mainloop()
