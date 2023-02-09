@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import messagebox
 from PIL import ImageTk, Image
-
+import requests
 
 from threading import *
 
@@ -56,6 +56,11 @@ def get_url():
     yt = YouTube(url)
     title = yt.title
     nam.configure(text=title)
+    logo_url = yt.thumbnail_url.replace('sddefault.jpg', 'maxresdefault.jpg')
+    response = requests.get(logo_url)
+    open("logo.jpg", "wb").write(response.content)
+    logo = customtkinter.CTkImage(dark_image=Image.open('logo.jpg'), size=(380, 200))
+    label_img.configure(image=logo)
 
     fnd.configure(text='Finding...', state=DISABLED)
 
@@ -156,12 +161,12 @@ fhd_q.place(x=230, y=80)
 twok_q = customtkinter.CTkRadioButton(master=root, text='2K', font=('Arial', 18), state=DISABLED, value=3, variable=var,
                                       command=selected)
 twok_q.pack()
-twok_q.place(x=120, y=150)
+twok_q.place(x=120, y=130)
 
 uhd_q = customtkinter.CTkRadioButton(master=root, text='4K', font=('Arial', 18), state=DISABLED, value=4, variable=var,
                                      command=selected)
 uhd_q.pack()
-uhd_q.place(x=230, y=150)
+uhd_q.place(x=230, y=130)
 
 dwnl = customtkinter.CTkButton(master=root, text='Download', font=('Arial', 18), command=threading_download,
                                state=DISABLED)
@@ -177,6 +182,12 @@ nam0.place(x=180, y=360)
 nam = customtkinter.CTkLabel(master=root, justify=RIGHT, width=40, text='', font=('Arial', 14))
 nam.pack(side=BOTTOM)
 nam.place(x=10, y=380)
+
+
+
+label_img = customtkinter.CTkLabel(master=root, text='')
+label_img.pack()
+label_img.place(x=10, y=160)
 
 
 #########################
