@@ -13,7 +13,6 @@ import os
 
 import customtkinter
 
-
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
@@ -54,6 +53,14 @@ def threading_download():
 
 
 def get_url():
+    fnd.configure(state=DISABLED)
+    link.configure(state=DISABLED)
+    sd_q.configure(state=DISABLED)
+    hd_q.configure(state=DISABLED)
+    fhd_q.configure(state=DISABLED)
+    twok_q.configure(state=DISABLED)
+    uhd_q.configure(state=DISABLED)
+    audio_q.configure(state=DISABLED)
     url = link.get()
     yt = YouTube(url)
     title = yt.title
@@ -63,7 +70,6 @@ def get_url():
     open("logo.jpg", "wb").write(response.content)
     logo = customtkinter.CTkImage(dark_image=Image.open('logo.jpg'), size=(380, 200))
     label_img.configure(image=logo)
-    label_none_img.destroy()
     fnd.configure(text='Finding...', state=DISABLED)
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="480p"):
         sd_q.configure(state=NORMAL)
@@ -79,6 +85,7 @@ def get_url():
         audio_q.configure(state=NORMAL)
     fnd.configure(text='Find', state=NORMAL)
     dwnl.configure(state=NORMAL)
+    label_none_img.destroy()
 
 
 def selected():
@@ -116,6 +123,7 @@ def download():
     if sell == 6:
         download_audio()
 
+
 def download_video():
     url = link.get()
     yt = YouTube(url)
@@ -141,6 +149,7 @@ def download_video():
     os.remove('audio.mp3')
     os.remove('logo.jpg')
 
+
 def download_audio():
     url = link.get()
     yt = YouTube(url)
@@ -158,6 +167,7 @@ def download_audio():
     showinfo(title='Download Status', message='Download Completed!')
     os.system('start Download')
     os.remove('logo.jpg')
+
 
 def keypress(event):
     if event.keycode == 86:
