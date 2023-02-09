@@ -13,12 +13,10 @@ import os
 
 import customtkinter
 
-import AutoUpdate
+
 
 ##################
-AutoUpdate.set_url("https://raw.githubusercontent.com/Aporial/YouTube_Downloader_GUI/master/AutoUpdate/version.txt")
-AutoUpdate.set_current_version("0.0.1")
-print(AutoUpdate.is_up_to_date())
+
 ##################
 
 customtkinter.set_appearance_mode("dark")
