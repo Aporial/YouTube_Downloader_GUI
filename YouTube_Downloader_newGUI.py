@@ -63,7 +63,7 @@ def get_url():
     open("logo.jpg", "wb").write(response.content)
     logo = customtkinter.CTkImage(dark_image=Image.open('logo.jpg'), size=(380, 200))
     label_img.configure(image=logo)
-
+    label_none_img.destroy()
     fnd.configure(text='Finding...', state=DISABLED)
 
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="720p"):
@@ -178,18 +178,19 @@ dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
 bar.pack(side=BOTTOM, fill='x', padx=10)
 
-nam0 = customtkinter.CTkLabel(master=root, text='Name: ', font=('Arial', 14))
-nam0.pack()
-nam0.place(x=180, y=360)
-
-nam = customtkinter.CTkLabel(master=root, justify=RIGHT, width=40, text='', font=('Arial', 14))
+nam = customtkinter.CTkLabel(master=root, justify=RIGHT, width=40, text='Name: ', font=('Arial', 14))
 nam.pack(side=BOTTOM)
-nam.place(x=10, y=380)
+nam.place(x=10, y=382)
 
 label_img = customtkinter.CTkLabel(master=root, text='')
 label_img.pack()
-label_img.place(x=10, y=160)
+label_img.place(x=10, y=180)
 
+none_logo = customtkinter.CTkImage(dark_image=Image.open('Core/none_logo.png'), size=(380, 200))
+
+label_none_img = customtkinter.CTkLabel(master=root, image=none_logo, text='')
+label_none_img.pack()
+label_none_img.place(x=10, y=180)
 
 #########################
 def on_closing():
