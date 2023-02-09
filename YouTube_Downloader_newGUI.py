@@ -20,12 +20,14 @@ customtkinter.set_default_color_theme("dark-blue")
 
 video_file = 'video.mp4'
 audio_file = 'audio.mp3'
+logo_file = 'logo.jpg'
 
 if os.path.exists(video_file):
     os.remove('video.mp4')
 if os.path.exists(audio_file):
     os.remove('audio.mp3')
-
+if os.path.exists(logo_file):
+    os.remove('logo.jpg')
 ##################
 
 
@@ -119,7 +121,7 @@ def download():
     os.system('start Download')
     os.remove('video.mp4')
     os.remove('audio.mp3')
-
+    os.remove('logo.jpg')
 
 def keypress(event):
     if event.keycode == 86:
