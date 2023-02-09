@@ -139,9 +139,9 @@ def keypress(event):
 
 root.bind("<Control-KeyPress>", keypress)
 
-link = customtkinter.CTkEntry(master=root)
-link.pack(side='top', pady=5, ipady=5, )
-link.place(x=110, y=8, height=25, width=280)
+link = customtkinter.CTkEntry(master=root, height=25, width=280)
+link.pack(side='top', pady=5, ipady=5)
+link.place(x=110, y=8)
 
 label = customtkinter.CTkLabel(master=root, text='Enter link:', font=('Arial', 20))
 label.pack(side='top')
