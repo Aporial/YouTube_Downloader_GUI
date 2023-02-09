@@ -13,6 +13,14 @@ import os
 
 import customtkinter
 
+import AutoUpdate
+
+##################
+AutoUpdate.set_url("<FILE URL HERE>")
+AutoUpdate.set_current_version("0.1")
+print(AutoUpdate.is_up_to_date())
+##################
+
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
