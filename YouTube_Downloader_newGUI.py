@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import messagebox
-from PIL import ImageTk, Image
+from PIL import Image
 import requests
 
 from threading import *
@@ -123,6 +123,7 @@ def download():
     os.remove('audio.mp3')
     os.remove('logo.jpg')
 
+
 def keypress(event):
     if event.keycode == 86:
         event.widget.event_generate("<<Paste>>")
@@ -184,8 +185,6 @@ nam0.place(x=180, y=360)
 nam = customtkinter.CTkLabel(master=root, justify=RIGHT, width=40, text='', font=('Arial', 14))
 nam.pack(side=BOTTOM)
 nam.place(x=10, y=380)
-
-
 
 label_img = customtkinter.CTkLabel(master=root, text='')
 label_img.pack()
