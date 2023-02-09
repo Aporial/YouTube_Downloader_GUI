@@ -30,7 +30,6 @@ if os.path.exists(logo_file):
     os.remove('logo.jpg')
 ##################
 
-
 root = customtkinter.CTk()
 root.title('YouTube Downloader')
 root.geometry('400x500+750+250')
@@ -40,18 +39,15 @@ root.resizable(False, False)
 ##################
 var = IntVar()
 
-
 ##################
 
 def threading_url():
     t1 = Thread(target=get_url)
     t1.start()
 
-
 def threading_download():
     t2 = Thread(target=download)
     t2.start()
-
 
 def get_url():
     url = link.get()
@@ -78,10 +74,8 @@ def get_url():
     fnd.configure(text='Find', state=NORMAL)
     dwnl.configure(state=NORMAL)
 
-
 def selected():
     var.get()
-
 
 def download():
     url = link.get()
@@ -123,7 +117,6 @@ def download():
     os.remove('audio.mp3')
     os.remove('logo.jpg')
 
-
 def keypress(event):
     if event.keycode == 86:
         event.widget.event_generate("<<Paste>>")
@@ -135,7 +128,6 @@ def keypress(event):
         event.widget.event_generate("<<Clear>>")
     elif event.keycode == 65:
         event.widget.event_generate("<<SelectAll>>")
-
 
 root.bind("<Control-KeyPress>", keypress)
 
@@ -178,9 +170,8 @@ dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
 bar.pack(side=BOTTOM, fill='x', padx=10)
 
-nam = customtkinter.CTkLabel(master=root, justify=RIGHT, width=40, text='Name: ', font=('Arial', 14))
+nam = customtkinter.CTkLabel(master=root, justify=CENTER, text='Name', font=('Arial', 14))
 nam.pack(side=BOTTOM)
-nam.place(x=10, y=382)
 
 label_img = customtkinter.CTkLabel(master=root, text='')
 label_img.pack()
@@ -196,7 +187,6 @@ label_none_img.place(x=10, y=180)
 def on_closing():
     if messagebox.askokcancel("Exit", "Do you want to exit?"):
         root.destroy()
-
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 root.mainloop()
