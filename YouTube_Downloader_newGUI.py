@@ -258,32 +258,32 @@ fnd.place(x=130, y=40)
 sd_q = customtkinter.CTkRadioButton(master=root, text='SD', font=('Arial', 18), state=DISABLED, value=1, variable=var,
                                     command=selected)
 sd_q.pack()
-sd_q.place(x=25, y=80)
+sd_q.place(x=90, y=80)
 
 hd_q = customtkinter.CTkRadioButton(master=root, text='HD', font=('Arial', 18), state=DISABLED, value=2, variable=var,
                                     command=selected)
 hd_q.pack()
-hd_q.place(x=100, y=80)
+hd_q.place(x=160, y=80)
 
 fhd_q = customtkinter.CTkRadioButton(master=root, text='Full HD', font=('Arial', 18), state=DISABLED, value=3,
                                      variable=var, command=selected)
 fhd_q.pack()
-fhd_q.place(x=175, y=80)
+fhd_q.place(x=225, y=80)
 
 twok_q = customtkinter.CTkRadioButton(master=root, text='2K', font=('Arial', 18), state=DISABLED, value=4, variable=var,
                                       command=selected)
 twok_q.pack()
-twok_q.place(x=25, y=130)
+twok_q.place(x=90, y=130)
 
 uhd_q = customtkinter.CTkRadioButton(master=root, text='4K', font=('Arial', 18), state=DISABLED, value=5, variable=var,
                                      command=selected)
 uhd_q.pack()
-uhd_q.place(x=100, y=130)
+uhd_q.place(x=160, y=130)
 
 audio_q = customtkinter.CTkRadioButton(master=root, text='Only Audio', font=('Arial', 18), state=DISABLED, value=6,
                                        variable=var, command=selected)
 audio_q.pack()
-audio_q.place(x=175, y=130)
+audio_q.place(x=225, y=130)
 
 dwnl = customtkinter.CTkButton(master=root, text='Download', font=('Arial', 18), command=threading_download,
                                state=DISABLED)
@@ -292,7 +292,7 @@ dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
 bar.pack(side=BOTTOM, fill='x', padx=10)
 
-nam = customtkinter.CTkLabel(master=root, justify=CENTER, text='Name', font=('Arial', 14))
+nam = customtkinter.CTkLabel(master=root, justify=CENTER, text='...', font=('Arial', 14))
 nam.pack(side=BOTTOM)
 
 label_img = customtkinter.CTkLabel(master=root, text='')
