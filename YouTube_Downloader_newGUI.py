@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import messagebox
+from PIL import ImageTk, Image
+
 
 from threading import *
 
@@ -98,13 +100,16 @@ def download():
     yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
     bar.configure(value=66)
-    ffmpeg.output(video, audio, 'Download/download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
+    ffmpeg.output(video, audio, 'Download/downloaded_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
     var.set(0)
     link.configure(state=NORMAL)
     dwnl.configure(text='Download', state=NORMAL)
     fnd.configure(state=NORMAL)
     bar.configure(value=75)
     bar.configure(value=0)
+    old_filename = yt.title
+    new_filename = old_filename.translate(str.maketrans(' ', ' ', '\/:*?"<>|'))
+    os.rename('Download/downloaded_video.mp4', 'Download/' + new_filename + '.mp4')
     showinfo(title='Download Status', message='Download Completed!')
     os.system('start Download')
     os.remove('video.mp4')
