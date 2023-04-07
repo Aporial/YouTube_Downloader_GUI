@@ -70,6 +70,7 @@ def get_url():
     open("logo.jpg", "wb").write(response.content)
     logo = customtkinter.CTkImage(dark_image=Image.open('logo.jpg'), size=(380, 200))
     label_img.configure(image=logo)
+    label_none_img.destroy()
     fnd.configure(text='Finding...', state=DISABLED)
     if yt.streams.filter(video_codec="vp9", adaptive=True, res="480p"):
         sd_q.configure(state=NORMAL)
@@ -85,7 +86,6 @@ def get_url():
         audio_q.configure(state=NORMAL)
     fnd.configure(text='Find', state=NORMAL)
     dwnl.configure(state=NORMAL)
-    label_none_img.destroy()
 
 
 def selected():
