@@ -250,6 +250,12 @@ label_none_img.place(x=10, y=180)
 #########################
 def on_closing():
     if messagebox.askokcancel("Exit", "Do you want to exit?"):
+        if os.path.exists(video_file):
+            os.remove('video.mp4')
+        if os.path.exists(audio_file):
+            os.remove('audio.mp3')
+        if os.path.exists(logo_file):
+            os.remove('logo.jpg')
         root.destroy()
 
 
