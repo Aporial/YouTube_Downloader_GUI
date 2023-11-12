@@ -30,12 +30,17 @@ root.resizable(False, False)
 var = IntVar()
 ##################
 
+
 def threading_url():
-    t1=Thread(target=get_url)
+    t1 = Thread(target=get_url)
     t1.start()
+
+
 def threading_download():
-    t2=Thread(target=download)
+    t2 = Thread(target=download)
     t2.start()
+
+
 def get_url():
     url = link.get()
     yt = YouTube(url)
@@ -54,8 +59,11 @@ def get_url():
 
     fnd.configure(text='Find', state=NORMAL)
     dwnl.configure(state=NORMAL)
+
+
 def selected():
     var.get()
+
 
 def download():
     url = link.get()
@@ -69,22 +77,28 @@ def download():
     uhd_q.configure(state=DISABLED)
     sell = var.get()
     if sell == 1:
-        yt.streams.filter(res="720p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="720p", progressive=False).first().download(
+            filename="video.mp4")
         video = ffmpeg.input("video.mp4")
     if sell == 2:
-        yt.streams.filter(res="1080p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="1080p", progressive=False).first().download(
+            filename="video.mp4")
         video = ffmpeg.input("video.mp4")
     if sell == 3:
-        yt.streams.filter(res="1440p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="1440p", progressive=False).first().download(
+            filename="video.mp4")
         video = ffmpeg.input("video.mp4")
     if sell == 4:
-        yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="2160p", progressive=False).first().download(
+            filename="video.mp4")
         video = ffmpeg.input("video.mp4")
     bar.configure(value=33)
-    yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
+    yt.streams.filter(abr="160kbps", progressive=False).first().download(
+        filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
     bar.configure(value=66)
-    ffmpeg.output(video, audio, 'Download/download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
+    ffmpeg.output(video, audio, 'Download/download_video.mp4',
+                  vcodec='copy', acodec='copy', loglevel="quiet").run()
     var.set(0)
     link.configure(state=NORMAL)
     dwnl.configure(text='Download', state=NORMAL)
@@ -95,6 +109,7 @@ def download():
     os.system('start Download')
     os.remove('video.mp4')
     os.remove('audio.mp3')
+
 
 link = ttk.Entry()
 link.pack(side='top', pady=5, ipady=5,)
@@ -108,19 +123,23 @@ fnd = ttk.Button(text='Find', command=threading_url)
 fnd.pack(side=TOP)
 fnd.place(x=165, y=40)
 
-hd_q = ttk.Radiobutton(text='HD', state=DISABLED, value=1, variable=var, command=selected)
+hd_q = ttk.Radiobutton(text='HD', state=DISABLED, value=1,
+                       variable=var, command=selected)
 hd_q.pack()
 hd_q.place(x=120, y=80)
 
-fhd_q = ttk.Radiobutton(text='Full HD', state=DISABLED, value=2, variable=var, command=selected)
+fhd_q = ttk.Radiobutton(text='Full HD', state=DISABLED,
+                        value=2, variable=var, command=selected)
 fhd_q.pack()
 fhd_q.place(x=230, y=80)
 
-twok_q = ttk.Radiobutton(text='2K', state=DISABLED, value=3, variable=var, command=selected)
+twok_q = ttk.Radiobutton(text='2K', state=DISABLED,
+                         value=3, variable=var, command=selected)
 twok_q.pack()
 twok_q.place(x=120, y=150)
 
-uhd_q = ttk.Radiobutton(text='4K', state=DISABLED, value=4, variable=var, command=selected)
+uhd_q = ttk.Radiobutton(text='4K', state=DISABLED,
+                        value=4, variable=var, command=selected)
 uhd_q.pack()
 uhd_q.place(x=230, y=150)
 
