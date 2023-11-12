@@ -68,7 +68,8 @@ def get_url():
     logo_url = yt.thumbnail_url.replace('sddefault.jpg', 'maxresdefault.jpg')
     response = requests.get(logo_url)
     open("logo.jpg", "wb").write(response.content)
-    logo = customtkinter.CTkImage(dark_image=Image.open('logo.jpg'), size=(380, 200))
+    logo = customtkinter.CTkImage(
+        dark_image=Image.open('logo.jpg'), size=(380, 200))
     label_img.configure(image=logo)
     label_none_img.destroy()
     fnd.configure(text='Finding...', state=DISABLED)
@@ -106,19 +107,24 @@ def download():
     audio_q.configure(state=DISABLED)
     sell = var.get()
     if sell == 1:
-        yt.streams.filter(res="480p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="480p", progressive=False).first().download(
+            filename="video.mp4")
         download_video()
     if sell == 2:
-        yt.streams.filter(res="720p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="720p", progressive=False).first().download(
+            filename="video.mp4")
         download_video()
     if sell == 3:
-        yt.streams.filter(res="1080p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="1080p", progressive=False).first().download(
+            filename="video.mp4")
         download_video()
     if sell == 4:
-        yt.streams.filter(res="1440p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="1440p", progressive=False).first().download(
+            filename="video.mp4")
         download_video()
     if sell == 5:
-        yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
+        yt.streams.filter(res="2160p", progressive=False).first().download(
+            filename="video.mp4")
         download_video()
     if sell == 6:
         download_audio()
@@ -129,7 +135,8 @@ def download_video():
     yt = YouTube(url)
     video = ffmpeg.input("video.mp4")
     bar.configure(value=33)
-    yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
+    yt.streams.filter(abr="160kbps", progressive=False).first().download(
+        filename="audio.mp3")
     audio = ffmpeg.input("audio.mp3")
     bar.configure(value=66)
     ffmpeg.output(video, audio, 'Download/downloaded_video.mp4', vcodec='copy', acodec='copy',
@@ -142,7 +149,8 @@ def download_video():
     bar.configure(value=0)
     old_filename = yt.title
     new_filename = old_filename.translate(str.maketrans(' ', ' ', '\/:*?"<>|'))
-    os.rename('Download/downloaded_video.mp4', 'Download/' + new_filename + '.mp4')
+    os.rename('Download/downloaded_video.mp4',
+              'Download/' + new_filename + '.mp4')
     showinfo(title='Download Status', message='Download Completed!')
     os.system('start Download')
     os.remove('video.mp4')
@@ -153,7 +161,8 @@ def download_video():
 def download_audio():
     url = link.get()
     yt = YouTube(url)
-    yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="Download/only_audio.mp3")
+    yt.streams.filter(abr="160kbps", progressive=False).first().download(
+        filename="Download/only_audio.mp3")
     bar.configure(value=66)
     var.set(0)
     link.configure(state=NORMAL)
@@ -188,11 +197,13 @@ link = customtkinter.CTkEntry(master=root, height=25, width=280)
 link.pack(side='top', pady=5, ipady=5)
 link.place(x=110, y=8)
 
-label = customtkinter.CTkLabel(master=root, text='Enter link:', font=('Arial', 20))
+label = customtkinter.CTkLabel(
+    master=root, text='Enter link:', font=('Arial', 20))
 label.pack(side='top')
 label.place(x=12, y=6)
 
-fnd = customtkinter.CTkButton(master=root, text='Find', font=('Arial', 18), command=threading_url)
+fnd = customtkinter.CTkButton(
+    master=root, text='Find', font=('Arial', 18), command=threading_url)
 fnd.pack(side=TOP)
 fnd.place(x=130, y=40)
 
@@ -233,14 +244,16 @@ dwnl.pack(side=BOTTOM, fill='x', padx=10, pady=10, ipady=10)
 bar = ttk.Progressbar(mode='determinate', maximum=100, value=0)
 bar.pack(side=BOTTOM, fill='x', padx=10)
 
-nam = customtkinter.CTkLabel(master=root, justify=CENTER, text='...', font=('Arial', 14))
+nam = customtkinter.CTkLabel(
+    master=root, justify=CENTER, text='...', font=('Arial', 14))
 nam.pack(side=BOTTOM)
 
 label_img = customtkinter.CTkLabel(master=root, text='')
 label_img.pack()
 label_img.place(x=10, y=180)
 
-none_logo = customtkinter.CTkImage(dark_image=Image.open('Core/none_logo.png'), size=(380, 200))
+none_logo = customtkinter.CTkImage(
+    dark_image=Image.open('Core/none_logo.png'), size=(380, 200))
 
 label_none_img = customtkinter.CTkLabel(master=root, image=none_logo, text='')
 label_none_img.pack()

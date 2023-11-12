@@ -27,24 +27,30 @@ for stream in yt.streams.filter(video_codec="vp9", adaptive=True, res="2160p"):
 
 ress = input('Select the video quality: ')
 if ress == '1':
-    yt.streams.filter(res="720p", progressive=False).first().download(filename="video.mp4")
+    yt.streams.filter(res="720p", progressive=False).first().download(
+        filename="video.mp4")
     video = ffmpeg.input("video.mp4")
 if ress == '2':
-    yt.streams.filter(res="1080p", progressive=False).first().download(filename="video.mp4")
+    yt.streams.filter(res="1080p", progressive=False).first().download(
+        filename="video.mp4")
     video = ffmpeg.input("video.mp4")
 if ress == '3':
-    yt.streams.filter(res="1440p", progressive=False).first().download(filename="video.mp4")
+    yt.streams.filter(res="1440p", progressive=False).first().download(
+        filename="video.mp4")
     video = ffmpeg.input("video.mp4")
 if ress == '4':
-    yt.streams.filter(res="2160p", progressive=False).first().download(filename="video.mp4")
+    yt.streams.filter(res="2160p", progressive=False).first().download(
+        filename="video.mp4")
     video = ffmpeg.input("video.mp4")
 
-yt.streams.filter(abr="160kbps", progressive=False).first().download(filename="audio.mp3")
+yt.streams.filter(abr="160kbps", progressive=False).first().download(
+    filename="audio.mp3")
 audio = ffmpeg.input("audio.mp3")
 
 print('Wait. Video is being processed...')
 
-ffmpeg.output(video, audio, 'download_video.mp4', vcodec='copy', acodec='copy', loglevel="quiet").run()
+ffmpeg.output(video, audio, 'download_video.mp4', vcodec='copy',
+              acodec='copy', loglevel="quiet").run()
 os.remove('video.mp4')
 os.remove('audio.mp3')
 
