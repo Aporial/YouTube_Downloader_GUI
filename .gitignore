@@ -1,3 +1,6 @@
 ffmpeg.exe
 download_video.mp4
 .vscode/settings.json
+build
+dist
+YouTube_Downloader_newGUI.spec
