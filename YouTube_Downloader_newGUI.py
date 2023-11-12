@@ -148,7 +148,7 @@ def download_video():
     bar.configure(value=75)
     bar.configure(value=0)
     old_filename = yt.title
-    new_filename = old_filename.translate(str.maketrans(' ', ' ', '\/:*?"<>|'))
+    new_filename = old_filename.translate(str.maketrans(' ', ' ', '\\ /:*?"<>|'))
     os.rename('Download/downloaded_video.mp4',
               'Download/' + new_filename + '.mp4')
     showinfo(title='Download Status', message='Download Completed!')
@@ -171,7 +171,7 @@ def download_audio():
     bar.configure(value=75)
     bar.configure(value=0)
     old_filename = yt.title
-    new_filename = old_filename.translate(str.maketrans(' ', ' ', '\/:*?"<>|'))
+    new_filename = old_filename.translate(str.maketrans(' ', ' ', '\\ /*?"<>|'))
     os.rename('Download/only_audio.mp3', 'Download/' + new_filename + '.mp3')
     showinfo(title='Download Status', message='Download Completed!')
     os.system('start Download')
