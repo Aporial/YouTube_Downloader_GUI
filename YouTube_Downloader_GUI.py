@@ -22,7 +22,7 @@ if os.path.exists(audio_file):
 
 root = Tk()
 root.title('YouTube Downloader')
-root.iconbitmap(default='./Core/favicon.ico')
+root.iconbitmap('./Core/favicon.ico')
 root.geometry('400x500+750+250')
 root.resizable(False, False)
 

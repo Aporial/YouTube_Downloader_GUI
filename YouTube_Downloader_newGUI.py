@@ -33,7 +33,7 @@ if os.path.exists(logo_file):
 root = customtkinter.CTk()
 root.title('YouTube Downloader')
 root.geometry('400x500+750+250')
-root.wm_iconbitmap(default='./Core/favicon.ico')
+root.wm_iconbitmap('./Core/favicon.ico')
 root.resizable(False, False)
 
 ##################
