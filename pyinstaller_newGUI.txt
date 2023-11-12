@@ -1,1 +1,4 @@
 pyinstaller --icon=icon.ico --noconfirm --onefile --windowed --add-data "C:\Users\Aporia\PycharmProjects\YouTube Downloader\venv\Lib\site-packages\customtkinter;customtkinter/"  "YouTube_Downloader_newGUI.py"
+
+pyinstaller --icon=icon.ico --noconfirm --onefile --windowed --collect-all customtkinter "YouTube_Downloader_newGUI.py"
+
